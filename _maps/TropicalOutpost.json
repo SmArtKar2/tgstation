@@ -1,0 +1,6 @@
+{
+    "map_name": "TropicalOutpost",
+    "map_path": "map_files/TropicalOutpost",
+    "map_file": "TropicalOutpost.dmm",
+	"traits": [{"Up" : 1, "Linkage" : "Cross"}, {"Up" : 1, "Down" : -1, "Baseturf" : "/turf/open/transparent/openspace", "Linkage" : "Cross"}, {"Down" : -1, "Baseturf" : "/turf/open/transparent/openspace", "Linkage" : "Cross"}]
+	}

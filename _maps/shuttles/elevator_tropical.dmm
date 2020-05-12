@@ -1,0 +1,19 @@
+"a" = (/obj/effect/turf_decal/stripes/line{dir = 10},/turf/open/floor/plasteel/dark,/area/shuttle/snowdin/elevator1)
+"b" = (/obj/effect/turf_decal/stripes/line{dir = 9},/turf/open/floor/plasteel/dark,/area/shuttle/snowdin/elevator1)
+"f" = (/obj/effect/turf_decal/stripes/line{dir = 1},/turf/open/floor/plasteel/dark,/area/shuttle/snowdin/elevator1)
+"p" = (/obj/effect/turf_decal/stripes/line,/obj/docking_port/mobile/elevator{id = "elevator_tropical"; name = "Tropical Elevator"},/turf/open/floor/plasteel/dark,/area/shuttle/snowdin/elevator1)
+"t" = (/turf/open/floor/plasteel/dark,/area/shuttle/snowdin/elevator1)
+"B" = (/obj/effect/turf_decal/stripes/line{dir = 6},/turf/open/floor/plasteel/dark,/area/shuttle/snowdin/elevator1)
+"F" = (/obj/machinery/computer/shuttle/ferry{name = "elevator console"; possible_destinations = "Surface Level_Dock;Cavern_Level_Dock;Lavaland_Level_Dock"; shuttleId = "Tropical_Elevator"},/obj/effect/turf_decal/stripes/line{dir = 1},/turf/open/floor/plasteel/dark,/area/shuttle/snowdin/elevator1)
+"J" = (/obj/effect/turf_decal/stripes/line{dir = 4},/turf/open/floor/plasteel/dark,/area/shuttle/snowdin/elevator1)
+"K" = (/obj/effect/turf_decal/stripes/line{dir = 5},/turf/open/floor/plasteel/dark,/area/shuttle/snowdin/elevator1)
+"P" = (/obj/effect/turf_decal/stripes/line,/turf/open/floor/plasteel/dark,/area/shuttle/snowdin/elevator1)
+"Q" = (/obj/effect/turf_decal/stripes/line{dir = 8},/turf/open/floor/plasteel/dark,/area/shuttle/snowdin/elevator1)
+
+(1,1,1) = {"
+bfffFfffK
+QtttttttJ
+QtttttttJ
+QtttttttJ
+aPPPpPPPB
+"}

@@ -166,6 +166,10 @@
 	port_id = "snowdin"
 	can_be_bought = FALSE
 
+/datum/map_template/shuttle/elevator
+	port_id = "elevator"
+	can_be_bought = FALSE
+
 // Shuttles start here:
 
 /datum/map_template/shuttle/emergency/backup
@@ -628,3 +632,8 @@
 /datum/map_template/shuttle/snowdin/excavation
 	suffix = "excavation"
 	name = "Snowdin Excavation Elevator"
+
+/datum/map_template/shuttle/elevator/tropical
+	suffix = "tropical"
+	name = "Tropical Elevator"
+

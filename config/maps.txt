@@ -47,5 +47,9 @@ endmap
 map runtimestation
 endmap
 
+map TropicalOutpost
+	votable
+endmap
+
 map multiz_debug
 endmap
