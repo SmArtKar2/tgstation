@@ -169,6 +169,12 @@
 	underlay_appearance.icon_state = "necro1"
 	return TRUE
 
+/turf/closed/indestructible/dense_rock
+	name = "Mountain rock"
+	desc = "No way we're digging through this."
+	icon 'icon/turf/denserock.dmi'
+	icon_state = "rock"
+
 /turf/closed/indestructible/riveted/boss
 	name = "necropolis wall"
 	desc = "A thick, seemingly indestructible stone wall."
