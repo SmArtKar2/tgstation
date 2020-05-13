@@ -172,8 +172,19 @@
 /turf/closed/indestructible/dense_rock
 	name = "Mountain rock"
 	desc = "No way we're digging through this."
-	icon 'icon/turf/denserock.dmi'
+	icon = 'icons/turf/denserock.dmi'
 	icon_state = "rock"
+	smooth = SMOOTH_MORE|SMOOTH_BORDER
+	canSmoothWith = null
+	opacity = 1
+	density = TRUE
+	layer = EDGED_TURF_LAYER
+
+/turf/closed/indestructible/dense_rock/Initialize(mapload)
+	. = ..()
+	var/matrix/M = new
+	M.Translate(-4, -4)
+	transform = M
 
 /turf/closed/indestructible/riveted/boss
 	name = "necropolis wall"

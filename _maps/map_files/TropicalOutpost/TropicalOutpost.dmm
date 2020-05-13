@@ -91,7 +91,7 @@
 "oO" = (/obj/structure/stone_tile/block{dir = 1},/obj/structure/stone_tile,/obj/structure/stone_tile/cracked{dir = 8},/turf/open/floor/plating/asteroid/basalt/lava_land_surface,/area/lavaland/surface/outdoors)
 "ps" = (/obj/structure/railing/corner{dir = 1},/turf/open/transparent/openspace,/area/space)
 "pt" = (/obj/structure/chair/office{dir = 8},/mob/living/simple_animal/sloth/citrus{name = "Paperwork"},/turf/open/floor/plasteel,/area/space)
-"px" = (/turf/closed/wall/mineral/plastitanium,/area/space)
+"px" = (/turf/closed/indestructible/dense_rock,/area/space)
 "pT" = (/obj/effect/turf_decal/stripes/corner,/turf/open/floor/plasteel,/area/space)
 "qa" = (/obj/effect/spawner/structure/window/plasma/reinforced,/turf/open/floor/plating,/area/space)
 "qm" = (/obj/effect/turf_decal/stripes/line{dir = 1},/turf/open/floor/plating,/area/space)
