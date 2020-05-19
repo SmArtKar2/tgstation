@@ -11,6 +11,11 @@
 	var/clawfootstep = null
 	var/heavyfootstep = null
 
+	///Layer this turf's edges are on, if this is higher than its neighbour it will use only its own edge icon. Used for SMOOTH_EDGES
+	var/edge_layer = 0
+	///Ref to any turf edge ontop of this turf.
+	var/obj/effect/smooth_edge/smooth_edge
+
 /turf/open/ComponentInitialize()
 	. = ..()
 	if(wet)
@@ -31,6 +36,81 @@
 //direction is direction of travel of air
 /turf/open/zAirOut(direction, turf/source)
 	return (direction == UP)
+
+/turf/open/edge_smooth(adjacencies)
+	for(var/cdir in GLOB.alldirs)
+		if(cdir in adjacencies) //We dont put the edge on things we smooth with.
+			continue
+		var/turf/open/T = get_step(src, cdir)
+		if(!istype(T))
+			continue
+		if(edge_layer > T.edge_layer) //Our edge layer has to be higher for this to apply
+			if(!T.smooth_edge) //If this turf has no smooth edge on it yet, create it.
+				T.smooth_edge = new(T, src)
+				T.smooth_edge.icon = icon
+				T.smooth_edge.layer = (edge_layer/100)+TURF_LAYER //Just above the turf layer
+				T.smooth_edge.name = name
+				T.smooth_edge.desc = desc
+			else //Otherwise just update it
+				smooth_icon(T.smooth_edge)
+
+
+/obj/effect/smooth_edge
+	smooth = SMOOTH_TRUE | SMOOTH_EDGES
+	anchored = TRUE
+	plane = FLOOR_PLANE
+	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
+
+/obj/effect/smooth_edge/Initialize(turf/open/T, turf/open/connected_turf)
+	. = ..()
+	canSmoothWith = list(connected_turf.type)
+	RegisterSignal(connected_turf, COMSIG_ATOM_SMOOTH, .proc/on_smoothing_change)
+	queue_smooth(src)
+
+///This proc handles cleanup
+/obj/effect/smooth_edge/proc/on_smoothing_change()
+	var/should_delete = TRUE
+	for(var/cdir in GLOB.alldirs)
+		var/turf/open/T = get_step(src, cdir)
+		if(!istype(T))
+			continue
+		should_delete = FALSE
+	if(should_delete)
+		qdel(src)
+	queue_smooth(src)
+
+/obj/effect/smooth_edge/edge_smooth(adjacencies)
+	var/atom/movable/AM
+	for(var/direction in list(5,6,9,10))
+		AM = find_type_in_direction(src, direction)
+		if(AM == NULLTURF_BORDER)
+			if((smooth & SMOOTH_BORDER))
+				adjacencies |= 1 << direction
+		else if((AM && !istype(AM)) || (istype(AM) && AM.anchored) )
+			adjacencies |= 1 << direction
+	var/dirs = 0
+	if(adjacencies & N_NORTH)
+		dirs |= NORTH
+		adjacencies &= ~(N_NORTHEAST|N_NORTHWEST|N_NORTH)
+	if(adjacencies & N_SOUTH)
+		dirs |= SOUTH
+		adjacencies &= ~(N_SOUTHEAST|N_SOUTHWEST|N_SOUTH)
+	if(adjacencies & N_EAST)
+		dirs |= EAST
+		adjacencies &= ~(N_NORTHEAST|N_SOUTHEAST|N_EAST)
+	if(adjacencies & N_WEST)
+		dirs |= WEST
+		adjacencies &= ~(N_NORTHWEST|N_SOUTHWEST|N_WEST)
+	icon_state = "e_[dirs]"
+	cut_overlays()
+	if(adjacencies & N_NORTHWEST)
+		add_overlay("c_1")
+	if(adjacencies & N_NORTHEAST)
+		add_overlay("c_2")
+	if(adjacencies & N_SOUTHWEST)
+		add_overlay("c_3")
+	if(adjacencies & N_SOUTHEAST)
+		add_overlay("c_4")
 
 /turf/open/indestructible
 	name = "floor"

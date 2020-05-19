@@ -39,6 +39,7 @@
 #define SMOOTH_DIAGONAL	(1<<2)	//if atom should smooth diagonally, this should be present in 'smooth' var
 #define SMOOTH_BORDER	(1<<3)	//atom will smooth with the borders of the map
 #define SMOOTH_QUEUED	(1<<4)	//atom is currently queued to smooth.
+#define SMOOTH_EDGES	(1<<5)	//atom uses smoothing thats adds decals to the edges to allow for less ugly transitions between turfs
 
 #define NULLTURF_BORDER 123456789
 
@@ -120,8 +121,12 @@
 	if(A.smooth & (SMOOTH_TRUE | SMOOTH_MORE))
 		var/adjacencies = calculate_adjacencies(A)
 
+		SEND_SIGNAL(A, COMSIG_ATOM_SMOOTH, adjacencies)
+
 		if(A.smooth & SMOOTH_DIAGONAL)
 			A.diagonal_smooth(adjacencies)
+		else if(A.smooth & SMOOTH_EDGES)
+			A.edge_smooth(adjacencies)
 		else
 			cardinal_smooth(A, adjacencies)
 
@@ -151,6 +156,10 @@
 
 	icon_state = ""
 	return adjacencies
+
+///Edge smoothing, is used in turf/open to handle smooth edges on turf transitions
+/atom/proc/edge_smooth(adjacencies)
+	return
 
 //only walls should have a need to handle underlays
 /turf/closed/wall/diagonal_smooth(adjacencies)
