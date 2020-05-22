@@ -633,7 +633,7 @@
 	suffix = "excavation"
 	name = "Snowdin Excavation Elevator"
 
-/datum/map_template/shuttle/elevator/tropical
-	suffix = "tropical"
-	name = "Tropical Elevator"
+/datum/map_template/shuttle/elevator/sproutpost
+	suffix = "sproutpost"
+	name = "Sprout Post Elevator"
 

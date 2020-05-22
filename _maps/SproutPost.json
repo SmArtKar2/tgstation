@@ -1,6 +1,6 @@
 {
-    "map_name": "TropicalOutpost",
-    "map_path": "map_files/TropicalOutpost",
-    "map_file": "TropicalOutpost.dmm",
+    "map_name": "Sprout Post",
+    "map_path": "map_files/SproutPost",
+    "map_file": "SproutPost.dmm",
 	"traits": [{"Up" : 1, "Linkage" : "Cross", "Baseturf" : "/turf/open/floor/plating/dirt/dark", "Gravity" : 1}, {"Up" : 1, "Down" : -1, "Baseturf" : "/turf/open/transparent/openspace", "Linkage" : "Cross", "Gravity" : 1}, {"Down" : -1, "Baseturf" : "/turf/open/transparent/openspace", "Linkage" : "Cross", "Gravity" : 1}]
 	}

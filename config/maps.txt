@@ -47,7 +47,7 @@ endmap
 map runtimestation
 endmap
 
-map TropicalOutpost
+map SproutPost
 	votable
 endmap
 
