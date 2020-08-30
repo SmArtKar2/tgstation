@@ -12,6 +12,9 @@
 	var/insanity_effect = 0 //is the owner being punished for low mood? If so, how much?
 	var/obj/screen/mood/screen_obj
 
+	///Currently enabled whim for this character
+	var/datum/whim/current_whim
+
 /datum/component/mood/Initialize()
 	if(!isliving(parent))
 		return COMPONENT_INCOMPATIBLE
@@ -32,6 +35,8 @@
 		var/datum/hud/hud = owner.hud_used
 		hud.show_hud(hud.hud_version)
 
+	set_next_whim_timer()
+
 /datum/component/mood/Destroy()
 	STOP_PROCESSING(SSmood, src)
 	unmodify_hud()
@@ -42,6 +47,13 @@
 
 	if(job in list("Research Director", "Scientist", "Roboticist"))
 		RegisterSignal(parent, COMSIG_ADD_MOOD_EVENT_RND, .proc/add_event) //Mood events that are only for RnD members
+
+
+///Create a random timer for when we should send the next whim over
+/datum/component/mood/proc/set_next_whim_timer()
+
+/datum/component/mood/proc/generate_random_whim(datum/source, job)
+
 
 /datum/component/mood/proc/print_mood(mob/user)
 	var/msg = "<span class='info'>*---------*\n<EM>My current mental status:</EM></span>\n"
@@ -173,19 +185,19 @@
 /datum/component/mood/process()
 	switch(mood_level)
 		if(1)
-			setSanity(sanity-0.3, SANITY_INSANE)
+			setSanity(sanity-0.5, SANITY_INSANE, SANITY_NEUTRAL)
 		if(2)
-			setSanity(sanity-0.15, SANITY_INSANE)
+			setSanity(sanity-0.25, SANITY_INSANE, SANITY_NEUTRAL)
 		if(3)
-			setSanity(sanity-0.1, SANITY_CRAZY)
+			setSanity(sanity-0.15, SANITY_INSANE, SANITY_NEUTRAL)
 		if(4)
-			setSanity(sanity-0.05, SANITY_UNSTABLE)
+			setSanity(sanity-0.08, SANITY_INSANE, SANITY_NEUTRAL)
 		if(5)
-			setSanity(sanity, SANITY_UNSTABLE) //This makes sure that mood gets increased should you be below the minimum.
+			setSanity(sanity, SANITY_CRAZY, SANITY_GREAT) //This makes sure that mood gets increased should you be below the minimum.
 		if(6)
-			setSanity(sanity+0.2, SANITY_UNSTABLE)
+			setSanity(sanity+0.2, SANITY_CRAZY, SANITY_GREAT)
 		if(7)
-			setSanity(sanity+0.3, SANITY_UNSTABLE)
+			setSanity(sanity+0.3, SANITY_CRAZY, SANITY_GREAT)
 		if(8)
 			setSanity(sanity+0.4, SANITY_NEUTRAL, SANITY_MAXIMUM)
 		if(9)
@@ -193,7 +205,7 @@
 	HandleNutrition()
 
 ///Sets sanity to the specified amount and applies effects.
-/datum/component/mood/proc/setSanity(amount, minimum=SANITY_INSANE, maximum=SANITY_GREAT, override = FALSE)
+/datum/component/mood/proc/setSanity(amount, minimum=SANITY_INSANE, maximum=SANITY_NEUTRAL, override = FALSE)
 	// If we're out of the acceptable minimum-maximum range move back towards it in steps of 0.7
 	// If the new amount would move towards the acceptable range faster then use it instead
 	if(amount < minimum)

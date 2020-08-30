@@ -8,12 +8,12 @@
 
 /datum/mood_event/decentroom
 	description = "<span class='nicegreen'>This room looks alright.</span>\n"
-	mood_change = 1
+	mood_change = 2
 
 /datum/mood_event/goodroom
 	description = "<span class='nicegreen'>This room looks really pretty!</span>\n"
-	mood_change = 3
+	mood_change = 5
 
 /datum/mood_event/greatroom
 	description = "<span class='nicegreen'>This room is beautiful!</span>\n"
-	mood_change = 5
+	mood_change = 7

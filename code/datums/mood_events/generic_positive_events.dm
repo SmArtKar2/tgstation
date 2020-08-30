@@ -37,7 +37,7 @@
 /datum/mood_event/book_nerd
 	description = "<span class='nicegreen'>I have recently read a book.</span>\n"
 	mood_change = 1
-	timeout = 5 MINUTES
+	timeout = 2 MINUTES
 
 /datum/mood_event/exercise
 	description = "<span class='nicegreen'>Working out releases those endorphins!</span>\n"
@@ -103,7 +103,7 @@
 
 /datum/mood_event/heretics
 	description = "<span class='nicegreen'>THE HIGHER I RISE , THE MORE I SEE.</span>\n"
-	mood_change = 10 //maybe being a cultist isnt that bad after all
+	mood_change = 6 //maybe being a cultist isnt that bad after all
 	hidden = TRUE
 
 /datum/mood_event/family_heirloom
@@ -144,7 +144,7 @@
 
 /datum/mood_event/clownshoes
 	description = "<span class='nicegreen'>The shoes are a clown's legacy, I never want to take them off!</span>\n"
-	mood_change = 5
+	mood_change = 3
 
 /datum/mood_event/sacrifice_good
 	description ="<span class='nicegreen'>The gods are pleased with this offering!</span>\n"
@@ -153,22 +153,22 @@
 
 /datum/mood_event/artok
 	description = "<span class='nicegreen'>It's nice to see people are making art around here.</span>\n"
-	mood_change = 2
+	mood_change = 1
 	timeout = 5 MINUTES
 
 /datum/mood_event/artgood
 	description = "<span class='nicegreen'>What a thought-provoking piece of art. I'll remember that for a while.</span>\n"
-	mood_change = 4
+	mood_change = 3
 	timeout = 5 MINUTES
 
 /datum/mood_event/artgreat
 	description = "<span class='nicegreen'>That work of art was so great it made me believe in the goodness of humanity. Says a lot in a place like this.</span>\n"
-	mood_change = 6
+	mood_change = 5
 	timeout = 5 MINUTES
 
 /datum/mood_event/pet_borg
 	description = "<span class='nicegreen'>I just love my robotic friends!</span>\n"
-	mood_change = 3
+	mood_change = 1
 	timeout = 5 MINUTES
 
 /datum/mood_event/bottle_flip
@@ -182,7 +182,7 @@
 
 /datum/mood_event/nanite_happiness
 	description = "<span class='nicegreen robot'>+++++++HAPPINESS ENHANCEMENT+++++++</span>\n"
-	mood_change = 7
+	mood_change = 4
 
 /datum/mood_event/nanite_happiness/add_effects(message)
 	description = "<span class='nicegreen robot'>+++++++[message]+++++++</span>\n"
