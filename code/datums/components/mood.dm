@@ -11,9 +11,15 @@
 	var/list/datum/mood_event/mood_events = list()
 	var/insanity_effect = 0 //is the owner being punished for low mood? If so, how much?
 	var/obj/screen/mood/screen_obj
+	///Weighted list of all the possible whims you can get
+	var/static/list/possible_whims = list(/datum/whim/craving/food = 5)
 
 	///Currently enabled whim for this character
 	var/datum/whim/current_whim
+	///Minimum time between whims
+	var/min_whim_time = 30 SECONDS
+	///Maximum time between whims
+	var/max_whim_time = 1 MINUTES
 
 /datum/component/mood/Initialize()
 	if(!isliving(parent))
@@ -28,6 +34,7 @@
 
 	RegisterSignal(parent, COMSIG_MOB_HUD_CREATED, .proc/modify_hud)
 	RegisterSignal(parent, COMSIG_JOB_RECEIVED, .proc/register_job_signals)
+	RegisterSignal(parent, COMSIG_WHIM_COMPLETED, .proc/whim_completed)
 
 	var/mob/living/owner = parent
 	if(owner.hud_used)
@@ -51,12 +58,26 @@
 
 ///Create a random timer for when we should send the next whim over
 /datum/component/mood/proc/set_next_whim_timer()
+	addtimer(CALLBACK(src, .proc/generate_random_whim), rand(min_whim_time, max_whim_time))
 
-/datum/component/mood/proc/generate_random_whim(datum/source, job)
+/datum/component/mood/proc/generate_random_whim()
+	current_whim = pickweight(possible_whims)
+	current_whim = new current_whim(parent)
+	to_chat(parent, "<span class='nicegreen'>[current_whim.get_whim_text()]</span>")
 
+///Signal responder from when whims are fulfilled
+/datum/component/mood/proc/whim_completed(datum/source)
+	SIGNAL_HANDLER
+
+	add_event(null, "whim", /datum/mood_event/whim, current_whim.mood_reward)
+	QDEL_NULL(current_whim)
+	to_chat(parent, "<span class='nicegreen'>I have fulfilled a whim.</span>")
+	set_next_whim_timer()
 
 /datum/component/mood/proc/print_mood(mob/user)
 	var/msg = "<span class='info'>*---------*\n<EM>My current mental status:</EM></span>\n"
+	if(current_whim)
+		msg += "<span class='notice'>My current whim: [current_whim.get_whim_text()]</span>\n"
 	msg += "<span class='notice'>My current sanity: </span>" //Long term
 	switch(sanity)
 		if(SANITY_GREAT to INFINITY)

@@ -1,3 +1,4 @@
+///Whims are desires a character might have, will reward the player for completion.
 /datum/whim
 	var/desc = "gimme gimme gimme"
 	var/mood_reward = 5
@@ -8,36 +9,17 @@
 	src.whim_owner = whim_owner
 	setup_whim()
 
+///Used for any extra behavior to allow the whim to work
 /datum/whim/proc/setup_whim()
 
+///Text to print when whim is examined
+/datum/whim/proc/get_whim_text()
+	return desc
+
+///Should be called when the whim is succesfully fulfilled
 /datum/whim/proc/fulfilled()
-	SEND_SIGNAL(M, COMSIG_ADD_MOOD_EVENT, "whim", /datum/mood_event/whim, mood_reward)
+	SEND_SIGNAL(whim_owner, COMSIG_WHIM_COMPLETED)
 
-/datum/whim/craving
-	mood_reward = 10
-	var/craved_object
-
-/datum/whim/craving/setup_whim()
-	craved_object = generate_craved_item()
-	desc = "I could really go for a [initial(craved_object.name)] right now."
-
-/datum/whim/craving/proc/generate_craved_item()
-	return
-
-/datum/whim/craving/food
-
-/datum/whim/craving/food/setup_whim()
-	RegisterSignal(parent, COMSIG_ITEM_AFTERATTACK, .proc/mobCheck)
-
-/datum/whim/proc/check_requirements(datum/source, )
-
-/datum/whim/craving/food/generate_craved_item()
-	return get_random_food()
-
-/datum/whim/craving/drink
-
-/datum/whim/craving/drink/generate_craved_item()
-	return get_random_drink()
 
 
 

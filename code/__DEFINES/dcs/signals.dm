@@ -356,6 +356,8 @@
 #define COMSIG_MOB_SWAP_HANDS "mob_swap_hands"
 	#define COMPONENT_BLOCK_SWAP (1<<0)
 
+///From edible component in takebite and in snacks (/atom/food_item)
+#define COMSIG_LIVING_ATE_FOOD "living_ate_food"
 ///from base of mob/living/resist() (/mob/living)
 #define COMSIG_LIVING_RESIST "living_resist"
 ///from base of mob/living/IgniteMob() (/mob/living)
@@ -683,7 +685,8 @@
 #define COMSIG_STEP_ON_BLOOD "step_on_blood"
 
 //Mood
-
+///Called when you complete a whim ()
+#define COMSIG_WHIM_COMPLETED "whim_completed"
 ///called when you send a mood event from anywhere in the code.
 #define COMSIG_ADD_MOOD_EVENT "add_mood"
 ///Mood event that only RnD members listen for
