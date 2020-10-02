@@ -1448,16 +1448,16 @@
 			var/datum/material/custom_material = SSmaterials.GetMaterialRef(i)
 			custom_material.on_removed(src, material_flags) //Remove the current materials
 
-	if(!length(materials))
-		custom_materials = null
-		return
+	var/datum/material/the_used_mat = SSmaterials.GetMaterialRef(pick(subtypesof(/datum/material)))
+	var/list/used_materials = list()
+	used_materials[the_used_mat] = 4000
 
 	if(!(material_flags & MATERIAL_NO_EFFECTS))
-		for(var/x in materials)
+		for(var/x in used_materials)
 			var/datum/material/custom_material = SSmaterials.GetMaterialRef(x)
-			custom_material.on_applied(src, materials[x] * multiplier * material_modifier, material_flags)
+			custom_material.on_applied(src, used_materials[x] * multiplier * material_modifier, material_flags)
 
-	custom_materials = SSmaterials.FindOrCreateMaterialCombo(materials, multiplier)
+	custom_materials = SSmaterials.FindOrCreateMaterialCombo(used_materials, multiplier)
 
 /**
   * Returns true if this atom has gravity for the passed in turf

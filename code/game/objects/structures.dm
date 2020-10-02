@@ -6,6 +6,7 @@
 	layer = BELOW_OBJ_LAYER
 	flags_ricochet = RICOCHET_HARD
 	receive_ricochet_chance_mod = 0.6
+	material_flags = MATERIAL_ADD_PREFIX | MATERIAL_COLOR | MATERIAL_AFFECT_STATISTICS
 
 	var/climb_time = 20
 	var/climb_stun = 20
